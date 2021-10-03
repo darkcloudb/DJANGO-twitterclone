@@ -1,0 +1,39 @@
+<header>
+  <a href="/"><button>Home</button></a>
+  <a href="/tweet/"><button>Tweet</button></a>
+  {% if request.user.tags.count > 0 %}
+  <a href="/notify/"
+    ><button>Notification {{request.user.tags.count}}</button></a
+  >
+  {% else %}
+  <a href="/notify/"><button>Notification</button></a>
+  {% endif %}
+  <a href="/user/{{user.id}}/"><button>My Profile</button></a>
+  {% if request.user.is_authenticated %}
+  <a href="/logout/"><button>Logout</button></a>
+  <a href="/admin/"><button>Admin</button></a>
+  {% endif %}
+</header>
+<h2>Welcome to {{ tweeter.username }}'s page</h2>
+<h4>
+  Tweets: {{ request.user.posts }} Following: {{ user.following.count }}
+  Followers: {{ user.followers.count }}
+</h4>
+
+<h5>{{ tweeter.username }} made {{ tweeter.posts }} tweets</h5>
+
+<h5>
+  {{ tweeter.username }} is following {{ tweeter.following.count }} others
+</h5>
+
+<h5>
+  {{ tweeter.followers.count }} people are following {{ tweeter.username }}
+</h5>
+
+<a href="/follow/{{tweeter.id}}/"
+  ><button>Follow {{ tweeter.username }}</button></a
+>
+
+<a href="/unfollow/{{tweeter.id}}/"
+  ><button>Unfollow {{ tweeter.username }}</button></a
+>
